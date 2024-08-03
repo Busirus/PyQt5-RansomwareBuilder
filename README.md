@@ -1,5 +1,9 @@
 # Ransomware Builder - Educational Use Only
 
+<div id="header" align="center">
+ <img src="https://image.noelshack.com/fichiers/2024/31/6/1722719562-screenshot-at-2024-08-03-23-10-33.png"
+</div>
+
 ## Features
 
 - **Custom Ransom Note**: Choose from predefined messages or create your own.
